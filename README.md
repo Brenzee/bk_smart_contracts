@@ -1,6 +1,6 @@
 # BK Smart Contracts
 
-This repository contains a collection of Smart Contract developed using Solidity and inline assembly.
+This repository contains a collection of Smart Contract self-developed using Solidity and inline assembly.
 
 ## Smart Contracts
 
