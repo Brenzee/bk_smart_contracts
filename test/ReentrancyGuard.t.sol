@@ -4,31 +4,31 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {ReentrancyGuard} from "../src/ReentrancyGuard.sol";
 
-contract SimpleReentrancyTestContract is ReentrancyGuard {
-    function test(address target, bytes calldata data) public nonReentrant {
+contract SimpleReentrancyContract is ReentrancyGuard {
+    function tCall(address target, bytes calldata data) public nonReentrant {
         (bool success,) = target.call(data);
         require(success, "Something failed");
     }
 
-    function test1() public nonReentrant {
+    function t1() public nonReentrant {
         return;
     }
 }
 
-contract CounterTest is Test {
-    SimpleReentrancyTestContract public testContract;
+contract ReentrancyGuardTest is Test {
+    SimpleReentrancyContract public testContract;
 
     function setUp() public {
-        testContract = new SimpleReentrancyTestContract();
+        testContract = new SimpleReentrancyContract();
     }
 
     function test_reentrancyGuard() public {
-        testContract.test1();
+        testContract.t1();
 
         vm.expectRevert();
-        testContract.test(
+        testContract.tCall(
             address(testContract),
-            abi.encodeWithSignature("test(address,bytes)", address(testContract), abi.encodeWithSignature("test1()"))
+            abi.encodeWithSignature("tCall(address,bytes)", address(testContract), abi.encodeWithSignature("t1()"))
         );
     }
 }
