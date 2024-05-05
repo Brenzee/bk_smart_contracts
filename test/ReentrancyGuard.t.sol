@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity 0.8.25;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {ReentrancyGuard} from "../src/ReentrancyGuard.sol";
 
 contract SimpleReentrancyContract is ReentrancyGuard {
