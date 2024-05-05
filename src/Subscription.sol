@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.25;
 
-/// @title ReentrancyGuard
-/// @notice Provides a modifier to prevent reentrancy attacks by using transient storage (tstore, tload)
 contract ReentrancyGuard {
-    /// @dev Storage slot for the reentrancy status
-    uint256 constant STATUS_SLOT = 0x50faf685b147df9542991c607c44d9086449c331254fbd8f457e5a863d8632cd; // keccak256("ReentrancyGuard.status")
+    //                             keccak256("ReentrancyGuard.status")
+    uint256 constant STATUS_SLOT = 0x50faf685b147df9542991c607c44d9086449c331254fbd8f457e5a863d8632cd;
 
-    /// @notice Modifier to prevent reentrancy attacks
-    /// @dev Uses inline assembly to access transient storage directly
     modifier nonReentrant() {
         assembly {
             let status := tload(STATUS_SLOT)
